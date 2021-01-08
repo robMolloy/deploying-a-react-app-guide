@@ -1,70 +1,143 @@
-# Getting Started with Create React App
+# A Guide To Deploying A react-router-dom React App (to gh-pages or apache servers)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a walkthrough of a react app deployment. The set up works well, as all stages of this set up can be implemented and it will still work in all node environments (development or production).
 
-## Available Scripts
+The files in this project can be used as a reference - they are set up as explained in this guide. So feel free to clone/fork the project if that's helpful to you.
 
-In the project directory, you can run:
+<br />
 
-### `npm start`
+# Create .env files
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- In the root of the app, create a file named '.env.production' and a file named '.env.development'.
+- Both files will store 2 variables 'PUBLIC_URL' and 'REACT_APP_PUBLIC_PATH'.
+- The variables in the '.env.development' will not have any value. The file should look like this;
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+  PUBLIC_URL=
+  REACT_APP_PUBLIC_PATH=
+```
 
-### `npm test`
+- The '.env.development' file stores the same variables. PUBLIC_URL which is the domain plus the path to the root of the app and REACT_APP_PUBLIC_PATH which is the path to the root of the app, so should look like this;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+  PUBLIC_URL=https://your.domain.com/at/some/path
+  REACT_APP_PUBLIC_PATH=at/some/path
+```
 
-### `npm run build`
+<br />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Direct the Router/BrowserRouter
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For this project,the BrowserRouter set up is in app.js .
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Change the basename to the REACT_APP_PUBLIC_PATH variable using 'basename={process.env.REACT_APP_PUBLIC_PATH}';
 
-### `npm run eject`
+```
+  <Router basename={`${process.env.REACT_APP_PUBLIC_PATH}`}>
+  [OR]
+  <BrowserRouter basename={`${process.env.REACT_APP_PUBLIC_PATH}`}>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- All routes should have 'path' properties that begin with '/';
+- All routes should have 'exact' properties;
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+  <Route exact path="/" component={Index} />
+  <Route exact path="/home" component={Home} />
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- All media 'src' values should be from the app root not the domain root so should not start with "/" i.e.;
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+  <img src="media/images/img1.jpg"/>
+```
 
-## Learn More
+<br />
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# For gh-pages (can be changed without affecting apache server set up)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Before you start this section, make sure the '.env.production' file is set up as explained in the 'Create .env files' section.
+- Set up a 'gh-pages' branch in your github project.
+- From the GitHub gui, in settings, change the repository details so that 'Website' matches the same url as the 'PUBLIC_PATH' variable in your .env.production file;
 
-### Code Splitting
+```
+  Website
+  https://your.domain.com/at/some/path
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Edit the 'package.json' file in the app root so that the value of scripts is;
 
-### Analyzing the Bundle Size
+```
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- In the terminal, from the app root, run the command 'npm run deploy';
 
-### Making a Progressive Web App
+```
+  npm run deploy
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- In a browser check the url that you used as the PUBLIC_PATH variable - it should be up and running.
 
-### Advanced Configuration
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# For Apache Server
 
-### Deployment
+- Before you start this section, make sure the '.env.production' file is set up as explained in the 'Create .env files' section.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- In the terminal, from the app root, run the command 'npm run build';
 
-### `npm run build` fails to minify
+```
+  npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Once the build has finished, drag and drop the contents of the build folder using your FTP client into the folder that you used as the PUBLIC_PATH variable.
+
+- In a browser check the url that you used as the PUBLIC_PATH variable - it should be up and running. If not, check the section below - you may have to configure apache.
+
+<br />
+
+# Further Apache Set Up
+
+For this project, in the app root, there is a copy for reference of the .htaccess file and the apache2.conf file. The .htaccess file will need to be moved to or created in the correct location. Do not replace your existing apache.conf file unless you know what you are doing - just edit the line as instructed.
+
+- In your browser, click on a react-router-dom Link so that your path is now https://your.domain.com/at/some/path/newPage - we will call this address the 'newPage' address.
+
+- Copy the newPage address and in a different tab paste it into the address bar. If it works your apache settings are correct.
+
+- If the address does not work, it is because the file does not exist and you will need to redirect to the index.html page.
+
+- Create a '.htaccess' file in your app's build folder (now in the folder that you used as the PUBLIC_PATH variable) with the following contents;
+
+```
+  FallbackResource /index.html
+```
+
+- Copy the newPage address and in a different tab paste it into the address bar. If it works your apache settings are correct.
+
+- For this step you will need root access. If your app stil doesn't work from the newPage address, you will need to change the settings so that apache knows to use the .htaccess file.
+
+- Edit the apache config file stored at '/etc/apache2/apache2.conf'. Change the directory settings to allow the .htaccess to override, like this;
+
+```
+  <Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+  </Directory>
+```
+
+- You will now need to restart apache. In your terminal run the command 'service apache2 restart';
+
+```
+  service apache2 restart
+```
+
+- In a browser check the url that you used as the PUBLIC_PATH variable - it should be up and running.
