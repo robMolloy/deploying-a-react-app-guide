@@ -1,6 +1,6 @@
 # A Guide To Deploying A react-router-dom React App (to gh-pages or apache servers)
 
-Walkthrough of a react app deployment. The set up works well, as all stages of this set up can be implemented and it will still work in all node environments (development or production).
+This is a walkthrough of a react app deployment. The set up works well, as all stages of this set up can be implemented and it will still work in all node environments (development or production).
 
 The files in this project can be used as a reference - they are set up as explained in this guide. So feel free to clone/fork the project if that's helpful to you.
 
@@ -28,7 +28,7 @@ The files in this project can be used as a reference - they are set up as explai
 
 # Direct the Router/BrowserRouter
 
-(For this project,the BrowserRouter set up is in app.js)
+For this project,the BrowserRouter set up is in app.js .
 
 - Change the basename to the REACT_APP_PUBLIC_PATH variable using 'basename={process.env.REACT_APP_PUBLIC_PATH}';
 
