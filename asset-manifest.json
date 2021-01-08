@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "https://robmolloy.github.io/deploying-a-react-app-guide/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/main.f5ad102b.chunk.js",
+    "main.js.map": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/main.f5ad102b.chunk.js.map",
+    "runtime-main.js": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/runtime-main.d0e9ecad.js",
+    "runtime-main.js.map": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/runtime-main.d0e9ecad.js.map",
+    "static/js/2.d67e8592.chunk.js": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/2.d67e8592.chunk.js",
+    "static/js/2.d67e8592.chunk.js.map": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/2.d67e8592.chunk.js.map",
+    "static/js/3.4f41b3eb.chunk.js": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/3.4f41b3eb.chunk.js",
+    "static/js/3.4f41b3eb.chunk.js.map": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/3.4f41b3eb.chunk.js.map",
+    "index.html": "https://robmolloy.github.io/deploying-a-react-app-guide/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "https://robmolloy.github.io/deploying-a-react-app-guide/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.d67e8592.chunk.js.LICENSE.txt": "https://robmolloy.github.io/deploying-a-react-app-guide/static/js/2.d67e8592.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d0e9ecad.js",
+    "static/js/2.d67e8592.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.f5ad102b.chunk.js"
+  ]
+}
