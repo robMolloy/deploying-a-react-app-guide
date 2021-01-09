@@ -117,7 +117,7 @@ For this project, in the app root, there is a copy for reference of the .htacces
 - Create a '.htaccess' file in your app's build folder (now in the folder that you used as the PUBLIC_PATH variable) with the following contents;
 
 ```
-  FallbackResource /index.html
+  FallbackResource index.html
 ```
 
 - Copy the newPage address and in a different tab paste it into the address bar. If it works your apache settings are correct.
