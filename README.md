@@ -65,12 +65,14 @@ For this project,the BrowserRouter set up is in app.js .
   https://your.domain.com/at/some/path
 ```
 
-- Edit the 'package.json' file in the app root so that the value of scripts is;
+- Edit the 'package.json' file in the app root so that the value of 'scripts' is;
 
 ```
   "scripts": {
+
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -114,13 +116,34 @@ For this project, in the app root, there is a copy for reference of the .htacces
 
 - If the address does not work, it is because the file does not exist and you will need to redirect to the index.html page.
 
-- Create a '.htaccess' file in your app's build folder (now in the folder that you used as the PUBLIC_PATH variable) with the following contents;
+- By default this step should be performed as the updated package.json will copy the file Create a '.htaccess' file in your app's build folder (now in the folder that you used as the PUBLIC_PATH variable) with the following contents;
 
 ```
   FallbackResource index.html
 ```
 
 - Copy the newPage address and in a different tab paste it into the address bar. If it works your apache settings are correct.
+
+- So that this action does not need to be performed on every build, create a file called '.htaccess' in the app root which contains the following;
+
+```
+  FallbackResource index.html
+```
+
+- Edit the 'package.json' file in the app root so that the value of 'scripts' is;
+
+```
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+
+    "build": "react-scripts build && cp .htaccess build/.htaccess",
+
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+```
 
 - For this step you will need root access. If your app stil doesn't work from the newPage address, you will need to change the settings so that apache knows to use the .htaccess file.
 
