@@ -116,7 +116,7 @@ For this project, in the app root, there is a copy for reference of the .htacces
 
 - If the address does not work, it is because the file does not exist and you will need to redirect to the index.html page.
 
-- By default this step should be performed as the updated package.json will copy the file Create a '.htaccess' file in your app's build folder (now in the folder that you used as the PUBLIC_PATH variable) with the following contents;
+- Create a '.htaccess' file in your app's build folder (now in the folder that you used as the PUBLIC_PATH variable) with the following contents;
 
 ```
   FallbackResource index.html
